@@ -39,7 +39,7 @@ var goodID = 0;
 
 io.on('connection',
     function (socket) {
-        console.log('a user connected' + socket.playerID);
+        console.log('a user connected');
         //将新连接的用户存储到用户列表中
         var player = {
             playerID: id,          //用户ID
@@ -175,7 +175,8 @@ io.on('connection',
     }
 );
 
-server.listen(9999, function () {
-    console.log('listening on 9999')
+var port = 9999;
+server.listen(port, function () {
+    console.log('server start at port= ', port);
 });
 
