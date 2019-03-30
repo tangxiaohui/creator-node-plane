@@ -1,11 +1,8 @@
 var data = {};
 
-
 data.socket = null;
 data.player = null;
-
 data.playerNodes = {};
-
 
 data.startTime = 0;
 data.serverTime = 0;

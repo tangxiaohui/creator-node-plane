@@ -2,15 +2,6 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //    default: null,
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
         edit:cc.EditBoxc 
     },
  
@@ -25,7 +16,7 @@ cc.Class({
             require('socket.io')
         }
         var socket = io('127.0.0.1:9999');
-        this._gameData.socket = socket;
+        this._gameData.socket = socket; // 全局单例类存储socket
         
         //服务器反回链接请求结果//data格式{player:player}
         socket.on('connection',this._onconnection.bind(this));
@@ -44,21 +35,18 @@ cc.Class({
     
     _onjoinHouse:function(data){
         if(data.result){
-                this._gameData.startTime = data.startTime;
-                this._gameData.serverTime = data.serverTime;
-                var time = new Date();
-                this._gameData.deltaLocalToServer = time.getTime() - data.serverTime;
-                cc.director.loadScene('fiting');
-            }else{
-                alert(data.message);
-            }
+            this._gameData.startTime = data.startTime;
+            this._gameData.serverTime = data.serverTime;
+            var time = new Date();
+            this._gameData.deltaLocalToServer = time.getTime() - data.serverTime;
+            cc.director.loadScene('fiting');
+        }else{
+            alert(data.message);
+        }
     },
+
     onDestroy:function(){
         this._gameData.socket.off('connection');
         this._gameData.socket.off('joinHouse');
-    },
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
-
-    // },
+    }
 });
