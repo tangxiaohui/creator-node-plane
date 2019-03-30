@@ -2,7 +2,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        edit:cc.EditBoxc 
+        edit: cc.EditBox
     },
  
     // use this for initialization
